@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дякуємо за заявку! | СІНК ЕНЕРДЖІ</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Rubik:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --lime-50:  #f7fbe8;
+      --lime-500: #9ec11c;
+      --lime-400: #b3d433;
+      --navy-50:  #f0f4f8;
+      --navy-100: #d9e2ec;
+      --navy-200: #bcccdc;
+      --navy-700: #102a43;
+      --navy-800: #0c1b33;
+      --navy-900: #081325;
+      --neutral-0: #ffffff;
+      --neutral-50: #f7f9f9;
+      --neutral-200: #dfe4e6;
+      --neutral-400: #9aa6ab;
+      --neutral-600: #515d63;
+      --font-display: 'Rubik', system-ui, sans-serif;
+      --font-sans: 'Montserrat', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-lg: 0 16px 40px rgba(12, 27, 51, 0.12);
+      --shadow-brand: 0 12px 32px rgba(158, 193, 28, 0.32);
+      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-sans); color: var(--navy-800); background: var(--neutral-50); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--navy-800); line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    .header { background: rgba(247, 249, 249, 0.94); border-bottom: 1px solid var(--neutral-200); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .brand-logo-img { height: 38px; width: auto; display: block; }
+    .phone-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--navy-800); color: var(--neutral-50) !important; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 13.5px; }
+
+    /* Main Box */
+    .main-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; }
+    .thankyou-box { max-width: 640px; width: 100%; background: #fff; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; box-shadow: var(--shadow-lg); border: 1px solid var(--neutral-200); }
+    .check-badge { width: 72px; height: 72px; border-radius: 50%; background: var(--lime-50); color: var(--lime-500); display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 24px auto; border: 2px solid var(--lime-500); }
+    .thankyou-title { font-size: 32px; margin-bottom: 12px; }
+    .thankyou-lead { font-size: 16px; color: var(--neutral-600); line-height: 1.6; margin-bottom: 32px; }
+
+    .steps-timeline { background: var(--neutral-50); border-radius: var(--radius-md); padding: 24px; text-align: left; margin-bottom: 32px; border: 1px solid var(--neutral-200); }
+    .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .t-num { width: 26px; height: 26px; border-radius: 50%; background: var(--navy-800); color: var(--lime-400); font-family: var(--font-display); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .t-text { font-size: 13.5px; color: var(--neutral-600); }
+    .t-text strong { color: var(--navy-800); }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 26px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 700; cursor: pointer; border: 1px solid transparent; transition: all 140ms var(--ease); text-align: center; }
+    .btn-lime { background: var(--lime-500); color: var(--navy-800); }
+    .btn-lime:hover { background: var(--lime-400); box-shadow: var(--shadow-brand); transform: translateY(-2px); }
+
+    /* Footer */
+    .footer { background: var(--navy-900); color: var(--navy-200); padding: 32px 0; text-align: center; font-size: 13px; }
+  </style>
+  <link rel="stylesheet" href="../nav.css">
+</head>
+<body>
+
+  <!-- Header -->
+    <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand-logo-link" aria-label="Think Energy Головна">
+        <img src="../assets/logo/think-energy-full.svg" alt="СІНК ЕНЕРДЖІ" class="brand-logo-img">
+      </a>
+
+      <nav class="nav" aria-label="Основна навігація">
+        <a href="../natural-gas/index.html" class="nav-link">Природний газ</a>
+        <a href="../electrical-energy/index.html" class="nav-link">Електроенергія</a>
+        <a href="../last-resort-supplier/index.html" class="nav-link">ПОН</a>
+        <a href="../calculator/index.html" class="nav-link">Калькулятор</a>
+        <a href="../documents/index.html" class="nav-link">Документи</a>
+        <a href="../about-us/index.html" class="nav-link">Про нас</a>
+        <a href="../contacts/index.html" class="nav-link">Контакти</a>
+        <a href="../knowledge/index.html" class="nav-link">База знань</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="tel:+380778888098" class="phone-pill" title="Пряма лінія трейдера">
+          <span class="phone-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </span>
+          <span>+38 077 888 80 98</span>
+        </a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileNavDrawer">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true" aria-label="Мобільне меню">
+      <div class="mobile-nav-header">
+        <a href="../index.html" class="mobile-nav-brand" aria-label="Think Energy">
+          <img src="../assets/logo/think-energy-white.svg" alt="Think Energy" class="mobile-nav-logo-img">
+        </a>
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Закрити меню">&times;</button>
+      </div>
+      <div class="mobile-nav-content">
+        <div class="mobile-nav-links">
+          <a href="../natural-gas/index.html" class="mobile-nav-link">
+            <span>Природний газ</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../electrical-energy/index.html" class="mobile-nav-link">
+            <span>Електроенергія</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../last-resort-supplier/index.html" class="mobile-nav-link">
+            <span>ПОН</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../calculator/index.html" class="mobile-nav-link">
+            <span>Калькулятор</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../documents/index.html" class="mobile-nav-link">
+            <span>Документи</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../about-us/index.html" class="mobile-nav-link">
+            <span>Про нас</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../contacts/index.html" class="mobile-nav-link">
+            <span>Контакти</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../knowledge/index.html" class="mobile-nav-link">
+            <span>База знань</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+        </div>
+        <div class="mobile-nav-footer">
+          <a href="tel:+380778888098" class="mobile-nav-phone phone-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span>+38 077 888 80 98</span>
+          </a>
+          <button type="button" class="btn btn-lime mobile-nav-cta" onclick="if(typeof openModal==='function'){openModal('Консультація енерготрейдера');}else{window.location.href='../contacts/index.html';}">
+            Отримати консультацію
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Content -->
+  <main class="main-wrap">
+    <div class="thankyou-box">
+      <div class="check-badge">✓</div>
+      <h1 class="thankyou-title">Дякуємо! Ваша заявка прийнята</h1>
+      <p class="thankyou-lead">
+        Провідний трейдер Think Energy зв'яжеться з вами протягом 15 хвилин у робочий час для узгодження графіка оплат та надання розрахунку.
+      </p>
+
+      <div class="steps-timeline">
+        <div class="timeline-item">
+          <div class="t-num">1</div>
+          <div class="t-text">
+            <strong>Дзвінок енерготрейдера:</strong> уточнення фактичного графіка навантаження підприємства та EIC-коду.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-num">2</div>
+          <div class="t-text">
+            <strong>Комерційна пропозиція:</strong> персональний розрахунок тарифів (подекадно 33/33/34 або факт).
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-num">3</div>
+          <div class="t-text">
+            <strong>Підписання КЕП:</strong> миттєве оформлення документів через системи «Вчасно» або «M.E.Doc».
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <a href="../index.html" class="btn btn-lime">Повернутися на головну</a>
+        <a href="../calculator/index.html" class="btn" style="background: var(--navy-50); color: var(--navy-800); border: 1px solid var(--neutral-200);">
+          Переглянути калькулятор
+        </a>
+      </div>
+
+      <div style="margin-top: 24px; font-size: 12.5px; color: var(--neutral-400);">
+        Термінові питання? Телефонуйте напряму до трейдерів: <strong style="color: var(--navy-800);">+38 077 888 80 98</strong>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2024–2026 ТОВ «СІНК ЕНЕРДЖІ» · ЄДРПОУ 45111501 · Харків, вул. Гоголя, 11 · <a href="../knowledge/index.html" style="color: var(--navy-200);">База знань</a></p>
+    </div>
+  </footer>
+
+  <script src="../nav.js" defer></script>
+
+  <link rel="stylesheet" href="../widget.css">
+  <script src="../widget.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор котирувань TTF: перерахунок €/МВт·год у грн за 1 000 м³ газу | Think Energy</title>
+  <meta name="description" content="Онлайн-калькулятор імпортного паритету газу: перерахунок європейських котирувань хабу TTF (€/MWh) у вартість 1 000 м³ природного газу в гривнях з ПДВ, калорійністю та доставкою в Україну.">
+  <link rel="canonical" href="https://thinkenergy.com.ua/natural-gas/ttf-calculator/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thinkenergy.com.ua/natural-gas/ttf-calculator/">
+  <meta property="og:title" content="Калькулятор котирувань TTF у грн/1 000 м³ | Think Energy">
+  <meta property="og:description" content="Перерахуйте європейські котирування газу TTF (€/МВт·год) у ціну в Україні: курс НБУ, калорійність, тариф входу в ГТС та ПДВ 20%.">
+  <meta property="og:image" content="https://thinkenergy.com.ua/assets/logo/think-energy-full.svg">
+
+  <!-- Official Webfonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Rubik:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../widget.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Головна",
+        "item": "https://thinkenergy.com.ua/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Природний газ",
+        "item": "https://thinkenergy.com.ua/natural-gas/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Калькулятор TTF",
+        "item": "https://thinkenergy.com.ua/natural-gas/ttf-calculator/"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --lime-500: #9ec11c;
+      --lime-400: #b3d433;
+      --navy-900: #081325;
+      --navy-800: #0c1b33;
+      --navy-700: #122140;
+      --navy-600: #1e335a;
+      --navy-200: #a8b6cd;
+      --clay-500: #dd6e42;
+      --clay-600: #c5522a;
+      --clay-100: #f8e3d8;
+      --neutral-0: #ffffff;
+      --neutral-50: #f7f9f9;
+      --neutral-100: #eef2f3;
+      --neutral-200: #dfe4e6;
+      --neutral-400: #9aa6ab;
+      --neutral-600: #515d63;
+      --font-display: 'Rubik', system-ui, sans-serif;
+      --font-sans: 'Montserrat', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(12, 27, 51, 0.08);
+      --shadow-md: 0 4px 12px rgba(12, 27, 51, 0.08);
+      --shadow-lg: 0 14px 32px rgba(12, 27, 51, 0.12);
+      --shadow-brand: 0 12px 32px rgba(158, 193, 28, 0.32);
+      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-sans); color: var(--navy-800); background: var(--neutral-50); line-height: 1.6; }
+    h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(--navy-800); line-height: 1.15; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+    .tabular-nums { font-family: var(--font-mono); font-feature-settings: 'tnum' 1; }
+
+    /* Header */
+    .header { position: sticky; top: 0; z-index: 100; background: rgba(247, 249, 249, 0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--neutral-200); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 20px; }
+    .brand-logo-img { height: 38px; width: auto; display: block; }
+    .nav { display: flex; align-items: center; gap: 22px; }
+    .nav-link { font-size: 14.5px; font-weight: 600; color: var(--neutral-600); padding: 6px 0; border-bottom: 2px solid transparent; }
+    .nav-link:hover, .nav-link.active { color: var(--navy-800); border-bottom-color: var(--lime-500); }
+    .phone-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--navy-800); color: var(--neutral-50) !important; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 13.5px; }
+
+    /* Breadcrumbs */
+    .breadcrumbs { padding: 16px 0; font-size: 13px; color: var(--neutral-600); display: flex; gap: 8px; align-items: center; }
+
+    /* Page Hero */
+    .page-hero { background: var(--navy-800); color: var(--neutral-50); padding: 56px 0 64px 0; position: relative; overflow: hidden; }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(135deg, transparent 0 34px, rgba(158, 193, 28, 0.08) 34px 36px);
+      pointer-events: none;
+    }
+    .page-hero-inner { position: relative; z-index: 2; max-width: 900px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; background: rgba(158, 193, 28, 0.2); border: 1px solid var(--lime-500); border-radius: 4px; color: var(--lime-400); font-size: 13px; font-weight: 700; text-transform: uppercase; margin-bottom: 16px; }
+    .page-title { font-size: clamp(30px, 3.8vw, 44px); color: var(--neutral-50); margin-bottom: 16px; }
+    .page-lead { font-size: 17px; line-height: 1.6; color: var(--navy-200); margin-bottom: 24px; }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 24px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 700; cursor: pointer; border: 1px solid transparent; transition: all 140ms var(--ease); }
+    .btn-lime { background: var(--lime-500); color: var(--navy-800); }
+    .btn-lime:hover { background: var(--lime-400); box-shadow: var(--shadow-brand); transform: translateY(-2px); }
+
+    /* Calculator Main Grid */
+    .calc-layout { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 32px; margin-top: -32px; position: relative; z-index: 10; margin-bottom: 64px; }
+    .calc-panel { background: var(--neutral-0); border-radius: var(--radius-md); border: 1px solid var(--neutral-200); box-shadow: var(--shadow-lg); padding: 36px; }
+    .results-panel { background: var(--navy-800); color: var(--neutral-50); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); padding: 36px; display: flex; flex-direction: column; justify-content: space-between; }
+
+    /* Form Fields */
+    .form-group { margin-bottom: 20px; }
+    .form-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .form-label { font-size: 14px; font-weight: 700; color: var(--navy-800); }
+    .form-val-display { font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--clay-600); }
+    .form-range { width: 100%; accent-color: var(--lime-500); height: 6px; cursor: pointer; }
+    .form-input { width: 100%; padding: 10px 14px; border: 1px solid var(--neutral-200); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 15px; font-weight: 600; color: var(--navy-800); background: var(--neutral-50); }
+    .form-input:focus { outline: none; border-color: var(--lime-500); background: #fff; }
+    .form-hint { font-size: 12px; color: var(--neutral-600); margin-top: 5px; line-height: 1.4; }
+
+    /* Quick Presets */
+    .presets-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .preset-btn { padding: 5px 12px; font-size: 12.5px; font-family: var(--font-mono); font-weight: 600; background: var(--neutral-100); border: 1px solid var(--neutral-200); border-radius: 4px; cursor: pointer; transition: all 120ms; }
+    .preset-btn:hover, .preset-btn.active { background: var(--navy-800); color: #fff; border-color: var(--navy-800); }
+
+    /* Toggle switches */
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--neutral-50); border-radius: var(--radius-sm); border: 1px solid var(--neutral-200); margin-bottom: 16px; }
+
+    /* Results Card */
+    .hero-price-card { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--navy-700); border-radius: var(--radius-sm); padding: 24px; margin-bottom: 24px; position: relative; }
+    .hero-price-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--lime-400); font-weight: 700; margin-bottom: 8px; }
+    .hero-price-val { font-family: var(--font-mono); font-size: clamp(34px, 4vw, 44px); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 6px; }
+    .hero-price-sub { font-size: 14px; color: var(--navy-200); }
+
+    .breakdown-list { border-top: 1px solid var(--navy-700); padding-top: 18px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
+    .breakdown-item { display: flex; justify-content: space-between; align-items: center; }
+    .breakdown-label { color: var(--navy-200); }
+    .breakdown-val { font-family: var(--font-mono); font-weight: 600; color: #fff; }
+
+    /* Spread banner */
+    .spread-box { background: rgba(158, 193, 28, 0.12); border: 1px solid rgba(158, 193, 28, 0.35); border-radius: var(--radius-sm); padding: 14px 18px; font-size: 13.5px; color: #fff; margin-bottom: 24px; }
+
+    /* Content sections */
+    .section { padding: 64px 0; }
+    .section-white { background: var(--neutral-0); border-top: 1px solid var(--neutral-200); border-bottom: 1px solid var(--neutral-200); }
+    .section-title { font-size: clamp(24px, 2.8vw, 34px); margin-bottom: 12px; }
+    .section-subtitle { font-size: 15.5px; color: var(--neutral-600); max-width: 720px; margin-bottom: 36px; }
+
+    /* Matrix Table */
+    .matrix-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--neutral-200); font-size: 13.5px; margin-bottom: 32px; }
+    .matrix-table th { background: var(--navy-800); color: #fff; padding: 14px 16px; font-weight: 700; text-align: center; }
+    .matrix-table td { padding: 12px 16px; border-bottom: 1px solid var(--neutral-200); text-align: center; font-family: var(--font-mono); }
+    .matrix-table td:first-child { font-weight: 700; background: var(--neutral-50); text-align: left; font-family: var(--font-sans); }
+    .matrix-table tr:hover td { background: rgba(158, 193, 28, 0.08); }
+
+    /* FAQ */
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .faq-item { background: var(--neutral-50); border: 1px solid var(--neutral-200); border-radius: var(--radius-sm); padding: 24px; }
+    .faq-q { font-size: 16px; font-weight: 700; color: var(--navy-800); margin-bottom: 8px; }
+    .faq-a { font-size: 14px; color: var(--neutral-600); line-height: 1.6; }
+
+    /* Footer */
+    .footer { background: var(--navy-900); color: var(--neutral-400); padding: 60px 0 30px 0; font-size: 14px; }
+    .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+    .footer-logo-img { height: 34px; width: auto; margin-bottom: 16px; }
+    .footer-nav { display: flex; flex-direction: column; gap: 8px; }
+    .footer-nav a { color: var(--navy-200); }
+    .footer-nav a:hover { color: var(--lime-400); }
+    .footer-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--neutral-50); margin-bottom: 14px; }
+    .footer-bottom { border-top: 1px solid var(--navy-700); padding-top: 24px; display: flex; justify-content: space-between; font-size: 13px; color: var(--navy-200); }
+
+    /* Modal Dialog */
+    dialog.modal-dialog { margin: auto; border: 1px solid var(--neutral-200); border-radius: var(--radius-md); padding: 32px; background: var(--neutral-0); color: var(--navy-800); width: 100%; max-width: 480px; box-shadow: var(--shadow-lg); }
+    dialog.modal-dialog::backdrop { background: rgba(12, 27, 51, 0.7); backdrop-filter: blur(6px); }
+
+    .parity-formula-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 36px; align-items: start; margin-bottom: 48px; }
+    @media (max-width: 960px) {
+      .calc-layout, .faq-grid, .footer-grid, .parity-formula-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 16px; }
+    }
+  </style>
+  <link rel="stylesheet" href="../nav.css">
+</head>
+<body>
+
+  <!-- Header -->
+    <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand-logo-link" aria-label="Think Energy Головна">
+        <img src="../assets/logo/think-energy-full.svg" alt="СІНК ЕНЕРДЖІ" class="brand-logo-img">
+      </a>
+
+      <nav class="nav" aria-label="Основна навігація">
+        <a href="../natural-gas/index.html" class="nav-link active">Природний газ</a>
+        <a href="../electrical-energy/index.html" class="nav-link">Електроенергія</a>
+        <a href="../last-resort-supplier/index.html" class="nav-link">ПОН</a>
+        <a href="../calculator/index.html" class="nav-link">Калькулятор</a>
+        <a href="../documents/index.html" class="nav-link">Документи</a>
+        <a href="../about-us/index.html" class="nav-link">Про нас</a>
+        <a href="../contacts/index.html" class="nav-link">Контакти</a>
+        <a href="../knowledge/index.html" class="nav-link">База знань</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="tel:+380778888098" class="phone-pill" title="Пряма лінія трейдера">
+          <span class="phone-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </span>
+          <span>+38 077 888 80 98</span>
+        </a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileNavDrawer">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true" aria-label="Мобільне меню">
+      <div class="mobile-nav-header">
+        <a href="../index.html" class="mobile-nav-brand" aria-label="Think Energy">
+          <img src="../assets/logo/think-energy-white.svg" alt="Think Energy" class="mobile-nav-logo-img">
+        </a>
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Закрити меню">&times;</button>
+      </div>
+      <div class="mobile-nav-content">
+        <div class="mobile-nav-links">
+          <a href="../natural-gas/index.html" class="mobile-nav-link active">
+            <span>Природний газ</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../electrical-energy/index.html" class="mobile-nav-link">
+            <span>Електроенергія</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../last-resort-supplier/index.html" class="mobile-nav-link">
+            <span>ПОН</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../calculator/index.html" class="mobile-nav-link">
+            <span>Калькулятор</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../documents/index.html" class="mobile-nav-link">
+            <span>Документи</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../about-us/index.html" class="mobile-nav-link">
+            <span>Про нас</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../contacts/index.html" class="mobile-nav-link">
+            <span>Контакти</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+          <a href="../knowledge/index.html" class="mobile-nav-link">
+            <span>База знань</span>
+            <span class="mobile-nav-arrow">→</span>
+          </a>
+        </div>
+        <div class="mobile-nav-footer">
+          <a href="tel:+380778888098" class="mobile-nav-phone phone-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span>+38 077 888 80 98</span>
+          </a>
+          <button type="button" class="btn btn-lime mobile-nav-cta" onclick="if(typeof openModal==='function'){openModal('Консультація енерготрейдера');}else{window.location.href='../contacts/index.html';}">
+            Отримати консультацію
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="../index.html">Головна</a>
+      <span>/</span>
+      <a href="../natural-gas/index.html">Природний газ</a>
+      <span>/</span>
+      <span>Котирування TTF та калькулятор</span>
+    </div>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        Біржовий імпортний індекс газу
+      </div>
+      <h1 class="page-title">Калькулятор котирувань TTF у грн за 1 000 м³ газу</h1>
+      <p class="page-lead">
+        Перераховуйте котирування нідерландського газового хабу Title Transfer Facility (TTF) з європейських євро за мегават-годину (€/MWh) у звичну ціну для українського бізнесу — гривні за тисячу кубометрів з урахуванням калорійності, курсу НБУ, логістики та ПДВ 20%.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Calculator Section -->
+  <main class="container">
+    <div class="calc-layout">
+      
+      <!-- Input Panel -->
+      <div class="calc-panel">
+        <h2 style="font-size: 20px; margin-bottom: 20px; color: var(--navy-800);">Параметри розрахунку</h2>
+
+        <!-- Field 1: TTF Price -->
+        <div class="form-group">
+          <div class="form-header">
+            <label class="form-label" for="ttfInput">Котирування хабу TTF (€/МВт·год):</label>
+            <span class="form-val-display" id="ttfValDisplay">38.50 €/MWh</span>
+          </div>
+          <input type="number" id="ttfInput" class="form-input" value="38.50" step="0.5" min="5" max="250">
+          <input type="range" id="ttfRange" class="form-range" value="38.5" min="10" max="120" step="0.5" style="margin-top: 10px;">
+          <div class="presets-row">
+            <span style="font-size: 11.5px; color: var(--neutral-600); align-self: center;">Пресет:</span>
+            <button class="preset-btn" onclick="setTtf(32.0)">32 € (Літо)</button>
+            <button class="preset-btn active" onclick="setTtf(38.5)">38.5 € (Поточна)</button>
+            <button class="preset-btn" onclick="setTtf(45.0)">45 € (Зима)</button>
+            <button class="preset-btn" onclick="setTtf(60.0)">60 € (Піковий попит)</button>
+            <button class="preset-btn" onclick="setTtf(90.0)">90 € (Криза)</button>
+          </div>
+        </div>
+
+        <!-- Field 2: EUR/UAH Rate -->
+        <div class="form-group">
+          <div class="form-header">
+            <label class="form-label" for="eurRateInput">Курс євро до гривні (EUR/UAH):</label>
+            <span class="form-val-display" id="eurValDisplay">45.20 ₴/€</span>
+          </div>
+          <input type="number" id="eurRateInput" class="form-input" value="45.20" step="0.10" min="20" max="80">
+          <div class="form-hint">Офіційний курс НБУ або міжбанківський курс закупівлі валюти.</div>
+        </div>
+
+        <!-- Field 3: GCV Calorific Value -->
+        <div class="form-group">
+          <div class="form-header">
+            <label class="form-label" for="gcvInput">Калорійність (МВт·год / 1 000 м³):</label>
+            <span class="form-val-display" id="gcvValDisplay">10.55 МВт·год</span>
+          </div>
+          <input type="number" id="gcvInput" class="form-input" value="10.55" step="0.05" min="9.5" max="11.5">
+          <div class="form-hint">Стандартний коефіцієнт Gross Calorific Value (GCV) для європейського газу: 10.50–10.65 МВт·год на 1 000 м³.</div>
+        </div>
+
+        <!-- Field 4: Enterprise Consumption Volume -->
+        <div class="form-group">
+          <div class="form-header">
+            <label class="form-label" for="volumeInput">Обсяг споживання на місяць (м³):</label>
+            <span class="form-val-display" id="volumeValDisplay">15 000 м³</span>
+          </div>
+          <input type="number" id="volumeInput" class="form-input" value="15000" step="1000" min="1000">
+        </div>
+
+        <!-- Logistics & Entry Toggles -->
+        <div style="border-top: 1px solid var(--neutral-200); padding-top: 18px; margin-top: 24px;">
+          <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--navy-800);">Логістика імпорту та податки:</div>
+          
+          <div class="toggle-row">
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Доставка з хабу до кордону України</div>
+              <div style="font-size: 12px; color: var(--neutral-600);">Бронювання транзиту Німеччина-Словаччина/Польща (~1.80 €/МВт·год)</div>
+            </div>
+            <input type="checkbox" id="checkTransport" checked style="width: 18px; height: 18px; accent-color: var(--lime-500); cursor: pointer;">
+          </div>
+
+          <div class="toggle-row">
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Вхід до ГТС України (ОГТСУ)</div>
+              <div style="font-size: 12px; color: var(--neutral-600);">Регульований тариф входу на міждержавному з'єднанні (185 ₴ / 1 000 м³)</div>
+            </div>
+            <input type="checkbox" id="checkGtsEntry" checked style="width: 18px; height: 18px; accent-color: var(--lime-500); cursor: pointer;">
+          </div>
+
+          <div class="toggle-row">
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Враховувати ПДВ 20%</div>
+              <div style="font-size: 12px; color: var(--neutral-600);">Обов'язковий податок для комерційних споживачів в Україні</div>
+            </div>
+            <input type="checkbox" id="checkVat" checked style="width: 18px; height: 18px; accent-color: var(--lime-500); cursor: pointer;">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Results Panel -->
+      <div class="results-panel">
+        <div>
+          <div class="hero-price-card">
+            <div class="hero-price-label">Імпортний еквівалент газу в Україні:</div>
+            <div class="hero-price-val" id="totalPriceUah">24 742 ₴</div>
+            <div class="hero-price-sub" id="priceSubText">за 1 000 м³ з ПДВ та доставкою</div>
+          </div>
+
+          <!-- Breakdown -->
+          <div class="breakdown-list">
+            <div class="breakdown-item">
+              <span class="breakdown-label">Ціна газу на хабі TTF в євро:</span>
+              <span class="breakdown-val" id="pureEurPerThousand">406.18 € / тис. м³</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Вартість сировини без логістики:</span>
+              <span class="breakdown-val" id="pureUahNoLogistics">18 359 ₴ / тис. м³</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Транспорт через Європу:</span>
+              <span class="breakdown-val" id="transportUahVal">+858 ₴ / тис. м³</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Тариф входу в ГТС України:</span>
+              <span class="breakdown-val" id="gtsEntryUahVal">+185 ₴ / тис. м³</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">ПДВ (20%):</span>
+              <span class="breakdown-val" id="vatUahVal">+4 124 ₴ / тис. м³</span>
+            </div>
+            <div class="breakdown-item" style="border-top: 1px dashed var(--navy-700); padding-top: 10px; margin-top: 6px;">
+              <span class="breakdown-label" style="font-weight: 700; color: #fff;">Бюджет на обраний обсяг (<span id="volSelectedText">15 000 м³</span>):</span>
+              <span class="breakdown-val" id="monthlyTotalBudget" style="color: var(--lime-400); font-size: 16px;">371 130 ₴</span>
+            </div>
+          </div>
+
+          <!-- UEB Spread Box -->
+          <div class="spread-box" id="spreadNotice">
+            <div style="font-weight: 700; color: var(--lime-400); margin-bottom: 4px;" id="spreadTitle">Порівняння з Українською біржею (УЕБ):</div>
+            <div id="spreadBody">При поточній ціні УЕБ 25 500 ₴/тис. м³, імпорт за індексом TTF вигідніший на 758 ₴ (-3.0%)!</div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn btn-lime" style="width: 100%;" onclick="openModal('Комерційна пропозиція за формулою TTF+')">
+            Отримати комерційну пропозицію за формулою
+          </button>
+          <div style="font-size: 12px; color: var(--navy-200); text-align: center; margin-top: 10px;">
+            Трейдери Think Energy розраховують фіксовані або плаваючі формульні контракти на сезон
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Formula & Educational Section -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-title">Як працює перерахунок: Офіційна формула імпортного паритету</div>
+      <p class="section-subtitle">
+        Чому європейські котирування TTF у МВт·год не можна просто помножити на курс валюти, і які складові визначають кінцеву ціну газу для підприємств в Україні.
+      </p>
+
+      <div class="parity-formula-grid">
+        <div style="background: var(--neutral-50); border: 1px solid var(--neutral-200); border-radius: var(--radius-sm); padding: 28px;">
+          <h3 style="font-size: 18px; margin-bottom: 14px; color: var(--navy-800);">Математична модель розрахунку:</h3>
+          <div style="background: var(--navy-800); color: #fff; padding: 16px 20px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
+            Ціна (грн/тис. м³) = [ (P<sub>TTF</sub> + L<sub>євро</sub>) × K<sub>МВт·год</sub> × E<sub>EUR/UAH</sub> + T<sub>ГТС</sub> ] × (1 + ПДВ)
+          </div>
+          <ul style="font-size: 14px; color: var(--neutral-600); line-height: 1.7; padding-left: 20px;">
+            <li><strong>P<sub>TTF</sub></strong> — котирування ф'ючерсу чи споту на хабі TTF (€/MWh).</li>
+            <li><strong>L<sub>євро</sub></strong> — вартість транзиту газу територією Європи (Німеччина, Чехія, Словаччина/Польща) до кордону (~1.5–2.5 €/MWh).</li>
+            <li><strong>K<sub>МВт·год</sub></strong> — коефіцієнт вищої теплоти згоряння (Gross Calorific Value, GCV). За стандартом ENTSOG та Кодексом ГТС України складає в середньому <strong>10.55 МВт·год на 1 000 м³</strong>.</li>
+            <li><strong>E<sub>EUR/UAH</sub></strong> — поточний курс валюти євро до гривні.</li>
+            <li><strong>T<sub>ГТС</sub></strong> — регульований тариф Оператора ГТС України на вхід у систему на точках міждержавних з'єднань ($4.45 / 1 000 м³ ≈ 185 грн).</li>
+            <li><strong>ПДВ</strong> — податок на додану вартість 20%.</li>
+          </ul>
+        </div>
+
+        <div style="background: var(--navy-800); color: #fff; border-radius: var(--radius-sm); padding: 28px;">
+          <h3 style="font-size: 18px; margin-bottom: 14px; color: #fff;">Приклад: Що означає TTF = 60 €?</h3>
+          <p style="font-size: 14px; color: var(--navy-200); line-height: 1.6; margin-bottom: 14px;">
+            Якщо на європейській біржі TTF ціна піднімається до <strong>60 €/МВт·год</strong>:
+          </p>
+          <div style="font-size: 13.5px; color: var(--neutral-100); line-height: 1.7;">
+            • Чиста ціна газу на хабі: 60 × 10.55 = <strong>633 €</strong> за 1 000 м³.<br>
+            • У гривні без доставки (курс 45.20): <strong>28 611 ₴</strong>.<br>
+            • З доставкою до України: <strong>29 654 ₴</strong> без ПДВ.<br>
+            • <strong>З ПДВ 20%: 35 585 ₴</strong> за тисячу кубометрів.<br>
+          </div>
+          <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--navy-700); font-size: 13px; color: var(--lime-400); display: flex; align-items: flex-start; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>Відмітку 50 000 – 60 000 ₴ газ досягає при TTF 85–105 €/МВт·год (як під час європейської кризи 2022 року).</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sensitivity Matrix -->
+      <h3 style="font-size: 20px; margin-bottom: 16px; color: var(--navy-800);">Матриця чутливості: Ціна газу в Україні (грн за 1 000 м³ з ПДВ)</h3>
+      <div class="table-responsive">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>Котирування TTF</th>
+              <th>Курс 42.0 ₴/€</th>
+              <th>Курс 44.0 ₴/€</th>
+              <th>Курс 46.0 ₴/€</th>
+              <th>Курс 48.0 ₴/€</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>30.00 €/МВт·год</strong></td>
+              <td>17 100 ₴</td>
+              <td>17 890 ₴</td>
+              <td>18 680 ₴</td>
+              <td>19 470 ₴</td>
+            </tr>
+            <tr>
+              <td><strong>40.00 €/МВт·год</strong></td>
+              <td>22 410 ₴</td>
+              <td>23 450 ₴</td>
+              <td>24 500 ₴</td>
+              <td>25 540 ₴</td>
+            </tr>
+            <tr>
+              <td><strong>50.00 €/МВт·год</strong></td>
+              <td>27 730 ₴</td>
+              <td>29 020 ₴</td>
+              <td>30 310 ₴</td>
+              <td>31 610 ₴</td>
+            </tr>
+            <tr>
+              <td><strong>60.00 €/МВт·год</strong></td>
+              <td>33 050 ₴</td>
+              <td>34 590 ₴</td>
+              <td>36 130 ₴</td>
+              <td>37 680 ₴</td>
+            </tr>
+            <tr>
+              <td><strong>80.00 €/МВт·год</strong></td>
+              <td>43 680 ₴</td>
+              <td>45 730 ₴</td>
+              <td>47 770 ₴</td>
+              <td>49 810 ₴</td>
+            </tr>
+            <tr>
+              <td><strong>100.00 €/МВт·год</strong></td>
+              <td>54 310 ₴</td>
+              <td>56 860 ₴</td>
+              <td>59 410 ₴</td>
+              <td>61 950 ₴</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">Часті запитання щодо котирувань TTF</div>
+      <p class="section-subtitle">
+        Відповіді на ключові питання фінансових директорів та енергетиків щодо європейського ціноутворення на природний газ.
+      </p>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-q">Що таке біржовий хаб TTF?</div>
+          <div class="faq-a">
+            Title Transfer Facility (TTF) — це віртуальна торгова точка в Нідерландах, яка є головним ціновим орієнтиром (бенчмарком) для всього ринку природного газу Європейського Союзу. Ціни ф'ючерсів TTF на біржі EEX та ICE формують базову вартість газу в Європі.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Чому в Європі ціна в МВт·год, а в Україні в кубометрах?</div>
+          <div class="faq-a">
+            В Європі природний газ розглядається як енергетичний ресурс, тому торгується за теплотворну здатність в енергетичних одиницях (МВт·год або ГДж). В Україні законодавчо також впроваджено облік в енергії, проте комерційні розрахунки підприємств традиційно базуються на об'ємі ($1\,000\text{ м}^3$) з прив'язкою до фактичної калорійності за маршрутом постачання.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Що вигідніше: імпорт за формулою TTF+ чи газ з Української біржі (УЕБ)?</div>
+          <div class="faq-a">
+            Це залежить від сезону та балансу попиту і пропозиції. У теплий період року внутрішній український газ видобутку на УЕБ часто торгується з дисконтом до імпортного паритету на $1\,000\text{--}3\,000\text{ ₴}$. Взимку при зростанні попиту ціни вирівнюються. Трейдери Think Energy допомагають обрати найвигідніший варіант у конкретний місяць.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Чи може підприємство зафіксувати ціну за формулою з прив'язкою до TTF?</div>
+          <div class="faq-a">
+            Так, Think Energy пропонує гнучкі комерційні договори: фіксована ціна на місяць/квартал або плаваюча формула з прив'язкою до середньозваженого індексу TTF Front Month. Це дозволяє підприємству хеджувати цінові ризики та отримувати прозорі ринкові умови.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="../assets/logo/think-energy-white.svg" alt="СІНК ЕНЕРДЖІ" class="footer-logo-img">
+          <nav class="footer-nav">
+            <a href="../natural-gas/index.html">Природний газ</a>
+            <a href="../electrical-energy/index.html">Електроенергія</a>
+            <a href="../last-resort-supplier/index.html">Вихід з ПОН</a>
+            <a href="../calculator/index.html">Калькулятор ліквідності</a>
+            <a href="index.html">Котирування TTF</a>
+            <a href="../about-us/index.html">Про нас</a>
+            <a href="../knowledge/index.html">База знань</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer-title">Адреса компанії</div>
+          <p style="color: var(--neutral-50); font-weight: 600; margin-bottom: 6px;">м. Харків, вул. Гоголя, 11</p>
+          <p style="font-size: 13px; color: var(--navy-200);">Постачання по всій території України</p>
+          <p style="margin-top: 10px; font-family: var(--font-mono); color: var(--lime-400); font-weight: 600;">+38 077 888 80 98</p>
+        </div>
+        <div>
+          <div class="footer-title">Графік роботи</div>
+          <p>Пн – Чт: 09:00 – 18:00<br>Пт: 09:00 – 16:00<br>Сб, Нд: черговий трейдер</p>
+          <p style="margin-top: 10px; color: var(--lime-400);">welcome@thinkenergy.com.ua</p>
+        </div>
+        <div>
+          <div class="footer-title">Швидкий зв'язок</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <a href="https://t.me/Thinkenergy1" target="_blank" style="padding: 6px 12px; border: 1px solid var(--navy-700); border-radius: 4px; color: #fff;">Telegram</a>
+            <a href="https://wa.me/+380778888098" target="_blank" style="padding: 6px 12px; border: 1px solid var(--navy-700); border-radius: 4px; color: #fff;">WhatsApp</a>
+            <a href="viber://chat?number=%2B380778888098" target="_blank" style="padding: 6px 12px; border: 1px solid var(--navy-700); border-radius: 4px; color: #fff;">Viber</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 ТОВ «СІНК ЕНЕРДЖІ». Код ЄДРПОУ 45111501.</div>
+        <div>Ліцензії НКРЕКП: Газ № 412 (28.02.2024), Світло № 718 (16.04.2024)</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Dialog -->
+  <dialog class="modal-dialog" id="leadDialog">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <h3 id="modalTitle">Запит на формульний розрахунок TTF+</h3>
+      <button onclick="closeModal()" style="background:none; border:none; font-size:22px; cursor:pointer;">✕</button>
+    </div>
+    <p style="font-size: 13.5px; color: var(--neutral-600); margin-bottom: 18px;">
+      Введіть контакти вашого підприємства. Трейдер підготує персональну пропозицію з фіксацією ціни або формульним індексом.
+    </p>
+    <form onsubmit="handleForm(event)">
+      <div class="form-group">
+        <label class="form-label">Компанія або ЄДРПОУ:</label>
+        <input type="text" class="form-input" placeholder="ТОВ або 8 цифр" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Очікуваний обсяг на місяць (м³):</label>
+        <input type="text" class="form-input" id="modalVolume" placeholder="Наприклад, 25 000 м³">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Контактний телефон:</label>
+        <input type="tel" class="form-input" placeholder="+38 (0__) ___-__-__" required>
+      </div>
+      <button type="submit" class="btn btn-lime" style="width: 100%; margin-top: 10px;">
+        Отримати індивідуальний розрахунок
+      </button>
+    </form>
+  </dialog>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // Elements
+    const ttfInput = document.getElementById('ttfInput');
+    const ttfRange = document.getElementById('ttfRange');
+    const ttfValDisplay = document.getElementById('ttfValDisplay');
+    const eurRateInput = document.getElementById('eurRateInput');
+    const eurValDisplay = document.getElementById('eurValDisplay');
+    const gcvInput = document.getElementById('gcvInput');
+    const gcvValDisplay = document.getElementById('gcvValDisplay');
+    const volumeInput = document.getElementById('volumeInput');
+    const volumeValDisplay = document.getElementById('volumeValDisplay');
+    const checkTransport = document.getElementById('checkTransport');
+    const checkGtsEntry = document.getElementById('checkGtsEntry');
+    const checkVat = document.getElementById('checkVat');
+
+    // Outputs
+    const totalPriceUah = document.getElementById('totalPriceUah');
+    const priceSubText = document.getElementById('priceSubText');
+    const pureEurPerThousand = document.getElementById('pureEurPerThousand');
+    const pureUahNoLogistics = document.getElementById('pureUahNoLogistics');
+    const transportUahVal = document.getElementById('transportUahVal');
+    const gtsEntryUahVal = document.getElementById('gtsEntryUahVal');
+    const vatUahVal = document.getElementById('vatUahVal');
+    const monthlyTotalBudget = document.getElementById('monthlyTotalBudget');
+    const volSelectedText = document.getElementById('volSelectedText');
+    const spreadTitle = document.getElementById('spreadTitle');
+    const spreadBody = document.getElementById('spreadBody');
+
+    // Constants
+    const TRANSPORT_EUR_PER_MWH = 1.80; // EU transit cost
+    const GTS_ENTRY_UAH = 185.00; // ~$4.45 entry tariff
+    const REFERENCE_UEB_UAH = 25500; // Reference Ukrainian Energy Exchange price with VAT
+
+    function formatNumber(num) {
+      return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    }
+
+    function calculate() {
+      const ttfEur = parseFloat(ttfInput.value) || 0;
+      const eurRate = parseFloat(eurRateInput.value) || 45.0;
+      const gcv = parseFloat(gcvInput.value) || 10.55;
+      const volume = parseFloat(volumeInput.value) || 0;
+      const hasTransport = checkTransport.checked;
+      const hasGts = checkGtsEntry.checked;
+      const hasVat = checkVat.checked;
+
+      // Update text displays
+      ttfValDisplay.textContent = ttfEur.toFixed(2) + ' €/MWh';
+      eurValDisplay.textContent = eurRate.toFixed(2) + ' ₴/€';
+      gcvValDisplay.textContent = gcv.toFixed(2) + ' МВт·год';
+      volumeValDisplay.textContent = formatNumber(volume) + ' м³';
+      volSelectedText.textContent = formatNumber(volume) + ' м³';
+
+      // 1. Pure Hub cost in EUR and UAH
+      const eurPerThousand = ttfEur * gcv;
+      const uahPureRaw = eurPerThousand * eurRate;
+
+      // 2. Logistics & Entry
+      const transportUah = hasTransport ? (TRANSPORT_EUR_PER_MWH * gcv * eurRate) : 0;
+      const gtsUah = hasGts ? GTS_ENTRY_UAH : 0;
+
+      // 3. Subtotal before VAT
+      const subtotalNoVat = uahPureRaw + transportUah + gtsUah;
+
+      // 4. VAT
+      const vatAmount = hasVat ? (subtotalNoVat * 0.20) : 0;
+
+      // 5. Final price per 1 000 m³
+      const finalPricePerThousand = subtotalNoVat + vatAmount;
+
+      // 6. Total budget for volume
+      const totalBudget = (finalPricePerThousand * volume) / 1000;
+
+      // Render to DOM
+      totalPriceUah.textContent = formatNumber(finalPricePerThousand) + ' ₴';
+      priceSubText.textContent = 'за 1 000 м³ ' + (hasVat ? 'з ПДВ' : 'без ПДВ') + (hasTransport ? ' та доставкою' : '');
+      pureEurPerThousand.textContent = eurPerThousand.toFixed(2) + ' € / тис. м³';
+      pureUahNoLogistics.textContent = formatNumber(uahPureRaw) + ' ₴ / тис. м³';
+      transportUahVal.textContent = hasTransport ? '+' + formatNumber(transportUah) + ' ₴ / тис. м³' : '0 ₴ (не враховано)';
+      gtsEntryUahVal.textContent = hasGts ? '+' + formatNumber(gtsUah) + ' ₴ / тис. м³' : '0 ₴ (не враховано)';
+      vatUahVal.textContent = hasVat ? '+' + formatNumber(vatAmount) + ' ₴ / тис. м³' : '0 ₴ (без ПДВ)';
+      monthlyTotalBudget.textContent = formatNumber(totalBudget) + ' ₴';
+
+      // UEB Comparison Spread
+      const spread = finalPricePerThousand - REFERENCE_UEB_UAH;
+      const spreadPercent = ((spread / REFERENCE_UEB_UAH) * 100).toFixed(1);
+      if (spread < 0) {
+        spreadTitle.textContent = 'Вигода відносно біржі УЕБ:';
+        spreadTitle.style.color = 'var(--lime-400)';
+        spreadBody.textContent = 'При біржовій ціні УЕБ ' + formatNumber(REFERENCE_UEB_UAH) + ' ₴, імпорт за індексом TTF вигідніший на ' + formatNumber(Math.abs(spread)) + ' ₴ (' + spreadPercent + '%)!';
+      } else {
+        spreadTitle.textContent = 'Порівняння з біржею УЕБ:';
+        spreadTitle.style.color = '#ff9b75';
+        spreadBody.textContent = 'Внутрішній український газ на УЕБ (' + formatNumber(REFERENCE_UEB_UAH) + ' ₴) зараз дешевший за імпорт на ' + formatNumber(spread) + ' ₴ (+' + spreadPercent + '%). Рекомендуємо ресурс внутрішнього видобутку.';
+      }
+    }
+
+    // Sync input and slider
+    ttfInput.addEventListener('input', () => {
+      ttfRange.value = ttfInput.value;
+      calculate();
+    });
+    ttfRange.addEventListener('input', () => {
+      ttfInput.value = ttfRange.value;
+      calculate();
+    });
+    eurRateInput.addEventListener('input', calculate);
+    gcvInput.addEventListener('input', calculate);
+    volumeInput.addEventListener('input', calculate);
+    checkTransport.addEventListener('change', calculate);
+    checkGtsEntry.addEventListener('change', calculate);
+    checkVat.addEventListener('change', calculate);
+
+    function setTtf(val) {
+      ttfInput.value = val;
+      ttfRange.value = val;
+      document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      calculate();
+    }
+
+    // Modal
+    const dialog = document.getElementById('leadDialog');
+    function openModal(title) {
+      if (title) document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalVolume').value = formatNumber(volumeInput.value) + ' м³ (TTF: ' + ttfInput.value + ' €)';
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+      else dialog.setAttribute('open', '');
+    }
+    function closeModal() {
+      if (typeof dialog.close === 'function') dialog.close();
+      else dialog.removeAttribute('open');
+    }
+    dialog.addEventListener('click', (e) => {
+      const rect = dialog.getBoundingClientRect();
+      if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) closeModal();
+    });
+    function handleForm(e) {
+      e.preventDefault();
+      alert('Дякуємо! Ваш запит на розрахунок за формулою TTF+ передано трейдеру. Ми надішлемо індивідуальну пропозицію найближчим часом.');
+      closeModal();
+    }
+
+    // Init
+    calculate();
+  </script>
+
+  <script src="../widget.js" defer></script>
+  <script src="../nav.js" defer></script>
+
+  <script>
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const dialogs = document.querySelectorAll('dialog[open]');
+        dialogs.forEach(d => { if (typeof d.close === 'function') d.close(); else d.removeAttribute('open'); });
+      }
+    });
+  </script>
+</body>
+</html>
